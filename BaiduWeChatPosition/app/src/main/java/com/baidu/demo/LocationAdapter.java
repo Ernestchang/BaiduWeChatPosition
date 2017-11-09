@@ -1,4 +1,4 @@
-package com.chenxuxu.baiduwechatposition;
+package com.baidu.demo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,26 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.core.PoiInfo;
 
 import java.util.List;
 
 
 /**
- * poi地点列表适配器(搜索页面)
+ * 地点列表适配器
  *
  * @author chenjunxu
- *
+ * @date 16/12/23
  */
-public class SearchPositionAdapter extends BaseAdapter {
+public class LocationAdapter extends BaseAdapter {
     private Context context;
-    private List<SuggestionResult.SuggestionInfo> datas;
+    private List<PoiInfo> datas;
     /**
      * 选中的item下标
      */
     private int selectItemIndex;
 
-    public SearchPositionAdapter(Context context, List<SuggestionResult.SuggestionInfo> datas) {
+    public LocationAdapter(Context context, List<PoiInfo> datas) {
         this.datas = datas;
         this.context = context;
         // 默认第一个为选中项
@@ -42,7 +42,7 @@ public class SearchPositionAdapter extends BaseAdapter {
         return datas.size();
     }
 
-    public void setSelectSearchItemIndex(int selectItemIndex) {
+    public void setSelectItemIndex(int selectItemIndex) {
         this.selectItemIndex = selectItemIndex;
     }
 
@@ -58,9 +58,9 @@ public class SearchPositionAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LocatorSearchViewHolder viewHolder;
+        LocatorViewHolder viewHolder = null;
         if (convertView == null) {
-            viewHolder = new LocatorSearchViewHolder();
+            viewHolder = new LocatorViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.location_item_poi, null, false);
             viewHolder.tv_poi_name = (TextView) convertView.findViewById(R.id.tv_poi_name);
             viewHolder.tv_poi_address = (TextView) convertView.findViewById(R.id.tv_poi_address);
@@ -68,13 +68,13 @@ public class SearchPositionAdapter extends BaseAdapter {
 
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (LocatorSearchViewHolder) convertView.getTag();
+            viewHolder = (LocatorViewHolder) convertView.getTag();
         }
 
         if (datas != null && datas.size() > 0) {
-            SuggestionResult.SuggestionInfo suggestionInfo = datas.get(position);
-            viewHolder.tv_poi_address.setText(suggestionInfo.city + suggestionInfo.district);
-            viewHolder.tv_poi_name.setText(suggestionInfo.key);
+            PoiInfo poiInfo = datas.get(position);
+            viewHolder.tv_poi_address.setText(poiInfo.address);
+            viewHolder.tv_poi_name.setText(poiInfo.name);
 
             if (selectItemIndex == position) {
                 viewHolder.img_cur_point.setImageResource(R.drawable.position_is_select);
@@ -85,7 +85,7 @@ public class SearchPositionAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class LocatorSearchViewHolder {
+    private class LocatorViewHolder {
         /**
          * 名称
          */

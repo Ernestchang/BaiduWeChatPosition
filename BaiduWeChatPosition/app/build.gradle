@@ -4,17 +4,35 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.chenxuxu.baiduwechatposition"
+        applicationId "com.baidu.demo"
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+
+        }
+        release {
+            storeFile file('../key/test.keystore')      //签名文件
+            storePassword "111111"
+            keyAlias "test"
+            keyPassword "111111" //签名密码
+            v2SigningEnabled false
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

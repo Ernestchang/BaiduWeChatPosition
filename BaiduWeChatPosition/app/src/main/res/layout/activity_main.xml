@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.chenxuxu.baiduwechatposition.MainActivity">
+    tools:context="com.chenxuxu.baiduwechatposition.com.baidu.demo.MainActivity">
 
     <TextView
         android:id="@+id/tv_show_position"

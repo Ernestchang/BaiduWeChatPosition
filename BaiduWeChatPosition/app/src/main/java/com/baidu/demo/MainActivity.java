@@ -1,4 +1,4 @@
-package com.chenxuxu.baiduwechatposition;
+package com.baidu.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 
 /**
  * 百度地图仿微信定位

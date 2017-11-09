@@ -1,4 +1,4 @@
-package com.chenxuxu.baiduwechatposition;
+package com.baidu.demo;
 
 import android.app.Activity;
 import android.content.Context;
